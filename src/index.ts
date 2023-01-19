@@ -24,18 +24,18 @@ weatherApp.get("/", (req, res) => {
 
             res.send({
                 success: true,
-                msg: `Calling api from Latitude ${lat} and Longitude ${lon}!`
+                msg: `You are calling api from Latitude ${lat} and Longitude ${lon}!`
             })
         } else {
             res.send({
                 success: true,
-                msg: "Location empty!"
+                msg: "Your location is empty on GeoIP!"
             })
         }
     } else {
         res.send({
             success: false,
-            msg: "Location not found!"
+            msg: "Your location not found on GeoIP!"
         })
     }
 })
