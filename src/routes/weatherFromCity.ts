@@ -10,7 +10,7 @@ const cityWeatherRouter: Router = Router()
 
 cityWeatherRouter.get("/:city", async (req, res) => {
     const { city } = req.params
-    const cityData: Array<object> = []
+    const mst: Array<object> = []
 
     if (empty(city)) {
         res.send({
@@ -19,7 +19,7 @@ cityWeatherRouter.get("/:city", async (req, res) => {
         })
     }
 
-    await fetch(`https://api.api-ninjas.com/v1/geocoding?city=${city}`, {
+    await fetch(`https://api.api-ninjas.com/v1/weather?city=${city}`, {
         method: 'GET',
         // @ts-ignore
         headers: {
@@ -28,27 +28,11 @@ cityWeatherRouter.get("/:city", async (req, res) => {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.length > 0) {
-                for (let i = 0; i < data.length; i++) {
-                    cityData.push({
-                        name: data[i].name,
-                        latitude: data[i].latitude,
-                        longitude: data[i].longitude,
-                        country: data[i].country
-                    })
-                }
-            } else {
-                res.send({
-                    success: false,
-                    msg: "City not found."
-                })
-            }
+            res.send({
+                success: true,
+                msg: data // Nothing yet.
+            })
         })
-
-    res.send({
-        success: true,
-        msg: "" // Nothing yet.
-    })
 })
 
 export default cityWeatherRouter

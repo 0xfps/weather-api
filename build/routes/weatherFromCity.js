@@ -20,14 +20,14 @@ const APIKEY = process.env.API_KEY;
 const cityWeatherRouter = (0, express_1.Router)();
 cityWeatherRouter.get("/:city", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { city } = req.params;
-    const cityData = [];
+    const mst = [];
     if ((0, empty_1.empty)(city)) {
         res.send({
             success: false,
             msg: "City empty"
         });
     }
-    yield fetch(`https://api.api-ninjas.com/v1/geocoding?city=${city}`, {
+    yield fetch(`https://api.api-ninjas.com/v1/weather?city=${city}`, {
         method: 'GET',
         // @ts-ignore
         headers: {
@@ -36,26 +36,10 @@ cityWeatherRouter.get("/:city", (req, res) => __awaiter(void 0, void 0, void 0, 
     })
         .then(response => response.json())
         .then(data => {
-        if (data.length > 0) {
-            for (let i = 0; i < data.length; i++) {
-                cityData.push({
-                    name: data[i].name,
-                    latitude: data[i].latitude,
-                    longitude: data[i].longitude,
-                    country: data[i].country
-                });
-            }
-        }
-        else {
-            res.send({
-                success: false,
-                msg: "City not found."
-            });
-        }
-    });
-    res.send({
-        success: true,
-        msg: "" // Nothing yet.
+        res.send({
+            success: true,
+            msg: data // Nothing yet.
+        });
     });
 }));
 exports.default = cityWeatherRouter;
