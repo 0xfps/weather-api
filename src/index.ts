@@ -13,38 +13,31 @@ weatherApp.listen(PORT, () => {
 })
 
 weatherApp.get("/", (req, res) => {
-    res.send({
-        success: true,
-        msg: "Welcome to Weather API ❤!"
-    })
+    const ip: string = req.ip.split(":")[req.ip.split(":").length - 1]
+
+    const geo = geoip.lookup(ip)
+
+    if (geo) {
+        if (!emptyObject(geo)) {
+            const lat: number = geo.ll[0]
+            const lon: number = geo.ll[1]
+
+            res.send({
+                success: true,
+                msg: `You are calling api from Latitude ${lat} and Longitude ${lon}!`
+            })
+        } else {
+            res.send({
+                success: true,
+                msg: "Your location is empty on GeoIP!"
+            })
+        }
+    } else {
+        res.send({
+            success: false,
+            msg: `The location you're calling from, ${ip}, was not found on GeoIP`
+        })
+    }
 })
-
-// weatherApp.get("/", (req, res) => {
-//     const ip: string = req.ip.split(":")[req.ip.split(":").length - 1]
-
-//     const geo = geoip.lookup(ip)
-
-//     if (geo) {
-//         if (!emptyObject(geo)) {
-//             const lat: number = geo.ll[0]
-//             const lon: number = geo.ll[1]
-
-//             res.send({
-//                 success: true,
-//                 msg: `You are calling api from Latitude ${lat} and Longitude ${lon}!`
-//             })
-//         } else {
-//             res.send({
-//                 success: true,
-//                 msg: "Your location is empty on GeoIP!"
-//             })
-//         }
-//     } else {
-//         res.send({
-//             success: false,
-//             msg: "The location you're calling from was not found on GeoIP"
-//         })
-//     }
-// })
 
 weatherApp.use("/city", cityWeatherRouter)

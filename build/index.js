@@ -35,8 +35,8 @@ weatherApp.get("/", (req, res) => {
     else {
         res.send({
             success: false,
-            msg: "Your location not found on GeoIP!"
+            msg: `The location you're calling from, ${ip}, was not found on GeoIP`
         });
     }
 });
-weatherApp.use("/v1/city", weatherFromCity_1.default);
+weatherApp.use("/city", weatherFromCity_1.default);
