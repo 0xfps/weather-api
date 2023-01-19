@@ -24,7 +24,7 @@ cityWeatherRouter.get("/:city", (req, res) => __awaiter(void 0, void 0, void 0, 
     if ((0, empty_1.empty)(city)) {
         res.send({
             success: false,
-            msg: "City empty"
+            msg: "City empty."
         });
     }
     yield fetch(`https://api.api-ninjas.com/v1/weather?city=${city}`, {

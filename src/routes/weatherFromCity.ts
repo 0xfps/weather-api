@@ -15,7 +15,7 @@ cityWeatherRouter.get("/:city", async (req, res) => {
     if (empty(city)) {
         res.send({
             success: false,
-            msg: "City empty"
+            msg: "City empty."
         })
     }
 
