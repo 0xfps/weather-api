@@ -40,4 +40,4 @@ weatherApp.get("/", (req, res) => {
     }
 })
 
-weatherApp.use("/v1/city", cityWeatherRouter)
+weatherApp.use("/city", cityWeatherRouter)
