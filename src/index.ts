@@ -35,7 +35,7 @@ weatherApp.get("/", (req, res) => {
     } else {
         res.send({
             success: false,
-            msg: `Your location was not found on GeoIP ${ip}!`
+            msg: "Your location was not found on GeoIP " + ip
         })
     }
 })
