@@ -28,7 +28,7 @@ weatherApp.get("/", (req, res) => {
         else {
             res.send({
                 success: true,
-                msg: "Your location is empty on GeoIP!"
+                msg: `Your location, ${ip}, is empty on GeoIP!`
             });
         }
     }
