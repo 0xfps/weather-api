@@ -10,7 +10,6 @@ const cityWeatherRouter: Router = Router()
 
 cityWeatherRouter.get("/:city", async (req, res) => {
     const { city } = req.params
-    const mst: Array<object> = []
 
     if (empty(city)) {
         res.send({

@@ -20,7 +20,6 @@ const APIKEY = process.env.API_KEY;
 const cityWeatherRouter = (0, express_1.Router)();
 cityWeatherRouter.get("/:city", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { city } = req.params;
-    const mst = [];
     if ((0, empty_1.empty)(city)) {
         res.send({
             success: false,
